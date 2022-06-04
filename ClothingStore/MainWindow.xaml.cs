@@ -31,91 +31,66 @@ namespace ClothingStore
         // Method to retrieve customers info 
         private void ShowCustomers()
         {
-            try
+            //string quer = "SELECT * FROM Customers";
+            string quer = "SELECT *,CONCAT(Id,' - ',name) AS custconcat FROM Customers";
+
+
+            SqlDataAdapter sqlAdapter = new SqlDataAdapter(quer,sqlconn);
+
+            using (sqlAdapter)
             {
-                //string quer = "SELECT * FROM Customers";
-                string quer = "SELECT *,CONCAT(Id,' - ',name) AS custconcat FROM Customers";
+                DataTable customersTable = new DataTable();  // datatable to store info from customers
 
+                sqlAdapter.Fill(customersTable);
 
-                SqlDataAdapter sqlAdapter = new SqlDataAdapter(quer, sqlconn);
-
-                using (sqlAdapter)
-                {
-                    DataTable customersTable = new DataTable();  // datatable to store info from customers
-
-                    sqlAdapter.Fill(customersTable);
-
-                    listCustomers.DisplayMemberPath = "custconcat";
-                    listCustomers.SelectedValuePath = "Id";
-                    listCustomers.ItemsSource = customersTable.DefaultView;
-                }
+                listCustomers.DisplayMemberPath = "custconcat";
+                listCustomers.SelectedValuePath = "Id";
+                listCustomers.ItemsSource = customersTable.DefaultView;
             }
-            catch
-            {
-
-            }
-
         }
 
         private void ShowOrders()
         {
-            try
-            {
-                string quer = "SELECT * FROM Orders o INNER JOIN Customers c ON C.Id=o.cCustomer" +
+            string quer = "SELECT * FROM Orders o INNER JOIN Customers c ON C.Id=o.cCustomer"+
                 " WHERE c.Id=@CustomerId";
 
-                SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
+            SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
 
-                SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCom);
+            SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCom);
 
-                using (sqlAdapter)
-                {
-                    sqlCom.Parameters.AddWithValue("@CustomerId", listCustomers.SelectedValue);
-
-
-                    DataTable ordersTable = new DataTable();
-
-                    sqlAdapter.Fill(ordersTable);
-
-                    listOrders.DisplayMemberPath = "orderDate";
-                    listOrders.SelectedValuePath = "Id";
-                    listOrders.ItemsSource = ordersTable.DefaultView;
-                }
-            }
-            catch
+            using (sqlAdapter)
             {
+                sqlCom.Parameters.AddWithValue("@CustomerId", listCustomers.SelectedValue);
 
 
+                DataTable ordersTable = new DataTable(); 
+
+                sqlAdapter.Fill(ordersTable);
+
+                listOrders.DisplayMemberPath = "orderDate";
+                listOrders.SelectedValuePath = "Id";
+                listOrders.ItemsSource = ordersTable.DefaultView;
             }
-
 
         }
 
         private void ShowAllOrders()
         {
-            try
+            //string quer = "SELECT * FROM Orders";
+            string quer = "SELECT *,CONCAT(cCustomer,' - ',orderDate) AS allOrders FROM Orders";
+
+            SqlDataAdapter sqlAdapter = new SqlDataAdapter(quer, sqlconn);
+
+            using (sqlAdapter)
             {
-                //string quer = "SELECT * FROM Orders";
-                string quer = "SELECT *,CONCAT(cCustomer,' - ',orderDate) AS allOrders FROM Orders";
+                DataTable allOrdersTable = new DataTable();  
 
-                SqlDataAdapter sqlAdapter = new SqlDataAdapter(quer, sqlconn);
+                sqlAdapter.Fill(allOrdersTable);
 
-                using (sqlAdapter)
-                {
-                    DataTable allOrdersTable = new DataTable();
-
-                    sqlAdapter.Fill(allOrdersTable);
-
-                    listAllOrders.DisplayMemberPath = "allOrders";
-                    listAllOrders.SelectedValuePath = "Id";
-                    listAllOrders.ItemsSource = allOrdersTable.DefaultView;
-                }
+                listAllOrders.DisplayMemberPath = "allOrders";
+                listAllOrders.SelectedValuePath = "Id";
+                listAllOrders.ItemsSource = allOrdersTable.DefaultView;
             }
-            catch
-            {
-
-            }
-
         }
 
 
@@ -124,7 +99,7 @@ namespace ClothingStore
         private void listCustomers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             ShowOrders();
-
+            
         }
 
         private void listAllOrders_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -152,7 +127,7 @@ namespace ClothingStore
             {
                 ShowCustomers();
             }
-            catch
+            catch 
             {
 
             }
@@ -179,42 +154,11 @@ namespace ClothingStore
             try
             {
                 ShowOrders();
-                ShowAllOrders();
             }
             catch
             {
 
             }
         }
-
-        private void bCustomerInsert_Click(object sender, RoutedEventArgs e)
-        {
-
-            MessageBox.Show("Customer created");
-
-            string quer = "INSERT INTO Customers (name) VALUES (@Name)";
-
-            SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
-
-            sqlconn.Open();
-
-            sqlCom.Parameters.AddWithValue("@Name", txtCustomer.Text);
-
-            sqlCom.ExecuteNonQuery();
-
-            sqlconn.Close();
-
-            txtCustomer.Clear();
-
-            try
-            {
-                ShowCustomers();
-            }
-            catch
-            {
-
-            }
-        }
-
     }
 }
