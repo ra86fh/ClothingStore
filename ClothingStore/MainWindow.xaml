@@ -7,8 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Customers" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <ListBox x:Name="listCustomers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="284,71,284,71"/>
+        <Label Content="Customer" FontSize="18" FontFamily="Javanese Text" RenderTransformOrigin="0.52,0.047" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" UseLayoutRounding="True" Margin="48,-3,552,0" Height="33" VerticalAlignment="Top"/>
+        <ListBox x:Name="listCustomers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="48,30,552,139" FontFamily="Javanese Text" SelectionChanged="listCustomers_SelectionChanged"/>
+        <ListBox x:Name="listOrders" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="298,30,302,139" FontFamily="Javanese Text"/>
+        <Label Content="Customer Orders" Margin="298,-2,302,0" FontFamily="Javanese Text" FontSize="18" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Height="41" VerticalAlignment="Top"/>
+        <ListBox x:Name="listAllOrders" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="552,30,48,32" SelectionChanged="listAllOrders_SelectionChanged"/>
+        <Label Content="All Orders" Margin="552,-3,48,0" FontFamily="Javanese Text" FontSize="18" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Height="41" VerticalAlignment="Top"/>
+        <Button x:Name="bCustomerDelete" Content="Delete" Margin="48,0,552,98" FontSize="16" FontFamily="Javanese Text" Height="36" VerticalAlignment="Bottom" Click="bCustomerDelete_Click"/>
+        <Button x:Name="bOrderDelete" Content="Delete" Margin="298,0,302,98" FontSize="16" FontFamily="Javanese Text" Click="bOrderDelete_Click" Height="36" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>
