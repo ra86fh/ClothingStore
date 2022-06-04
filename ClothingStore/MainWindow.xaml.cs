@@ -154,7 +154,6 @@ namespace ClothingStore
             try
             {
                 ShowOrders();
-                ShowAllOrders();
             }
             catch
             {
