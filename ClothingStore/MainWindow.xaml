@@ -8,7 +8,7 @@
         Title="Order Management Application" Height="450" Width="800" ResizeMode="NoResize">
 
     <Grid>
-        <Label Content="Customer" FontSize="18" FontFamily="Javanese Text" RenderTransformOrigin="0.52,0.047" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" UseLayoutRounding="True" Margin="48,-3,552,0" Height="33" VerticalAlignment="Top"/>
+        <Label Content="Customer" FontSize="18" FontFamily="Javanese Text" RenderTransformOrigin="0.52,0.047" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" UseLayoutRounding="True" Margin="48,-2,552,0" Height="33" VerticalAlignment="Top"/>
         <ListBox x:Name="listCustomers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="48,30,552,137" FontFamily="Javanese Text" SelectionChanged="listCustomers_SelectionChanged"/>
         <ListBox x:Name="listOrders" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="298,30,302,57" FontFamily="Javanese Text"/>
         <Label Content="Customer Orders" Margin="298,-2,302,0" FontFamily="Javanese Text" FontSize="18" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Height="41" VerticalAlignment="Top"/>
