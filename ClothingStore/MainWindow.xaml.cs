@@ -12,13 +12,13 @@ namespace ClothingStore
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
 
         SqlConnection sqlconn;
         public MainWindow()
-            
+
         {
-            
+
             InitializeComponent();
 
             string conn = ConfigurationManager.ConnectionStrings["ClothingStore.Properties.Settings.ClothingStoreManagementConnectionString"].ConnectionString;
@@ -52,20 +52,11 @@ namespace ClothingStore
                     listCustomers.SelectedValuePath = "Id";
                     listCustomers.ItemsSource = customersTable.DefaultView;
                 }
-
             }
             catch
             {
 
             }
-
-
-            }
-            catch
-            {
-          
-            }
-            
 
         }
 
@@ -80,7 +71,6 @@ namespace ClothingStore
 
                 SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCom);
 
-
                 using (sqlAdapter)
                 {
                     sqlCom.Parameters.AddWithValue("@CustomerId", listCustomers.SelectedValue);
@@ -99,29 +89,7 @@ namespace ClothingStore
             {
 
 
-
-
-                using (sqlAdapter)
-                {
-                    sqlCom.Parameters.AddWithValue("@CustomerId", listCustomers.SelectedValue);
-
-
-                    DataTable ordersTable = new DataTable();
-
-                    sqlAdapter.Fill(ordersTable);
-
-                    listOrders.DisplayMemberPath = "orderDate";
-                    listOrders.SelectedValuePath = "Id";
-                    listOrders.ItemsSource = ordersTable.DefaultView;
-                }
             }
-            catch
-            {
-
-                
-
-            }
-            
 
 
         }
@@ -242,7 +210,6 @@ namespace ClothingStore
             txtCustomer.Clear();
 
             try
-
             {
                 ShowCustomers();
             }
@@ -261,7 +228,7 @@ namespace ClothingStore
 
             try
             {
-                
+
                 string quer = "SELECT name FROM Customers where Id=@SelectedCustomer";
 
                 SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
@@ -284,8 +251,8 @@ namespace ClothingStore
             {
 
             }
-         
-           updateWindow.ShowDialog();
+
+            updateWindow.ShowDialog();
 
 
         }
