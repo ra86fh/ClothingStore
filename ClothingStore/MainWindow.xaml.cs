@@ -12,10 +12,13 @@ namespace ClothingStore
     /// </summary>
     public partial class MainWindow : Window
     {
+        
 
         SqlConnection sqlconn;
         public MainWindow()
+            
         {
+            
             InitializeComponent();
 
             string conn = ConfigurationManager.ConnectionStrings["ClothingStore.Properties.Settings.ClothingStoreManagementConnectionString"].ConnectionString;
@@ -49,12 +52,21 @@ namespace ClothingStore
                     listCustomers.SelectedValuePath = "Id";
                     listCustomers.ItemsSource = customersTable.DefaultView;
                 }
+
+            }
+            catch
+            {
+
+            }
+
+
             }
             catch
             {
           
             }
             
+
         }
 
         private void ShowOrders()
@@ -67,6 +79,27 @@ namespace ClothingStore
                 SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
 
                 SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCom);
+
+
+                using (sqlAdapter)
+                {
+                    sqlCom.Parameters.AddWithValue("@CustomerId", listCustomers.SelectedValue);
+
+
+                    DataTable ordersTable = new DataTable();
+
+                    sqlAdapter.Fill(ordersTable);
+
+                    listOrders.DisplayMemberPath = "orderDate";
+                    listOrders.SelectedValuePath = "Id";
+                    listOrders.ItemsSource = ordersTable.DefaultView;
+                }
+            }
+            catch
+            {
+
+
+
 
                 using (sqlAdapter)
                 {
@@ -86,8 +119,10 @@ namespace ClothingStore
             {
 
                 
+
             }
             
+
 
         }
 
@@ -115,7 +150,7 @@ namespace ClothingStore
             {
 
             }
-            
+
         }
 
 
@@ -124,7 +159,7 @@ namespace ClothingStore
         private void listCustomers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             ShowOrders();
-            
+
         }
 
         private void listAllOrders_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -152,7 +187,7 @@ namespace ClothingStore
             {
                 ShowCustomers();
             }
-            catch 
+            catch
             {
 
             }
@@ -207,6 +242,7 @@ namespace ClothingStore
             txtCustomer.Clear();
 
             try
+
             {
                 ShowCustomers();
             }
@@ -214,6 +250,49 @@ namespace ClothingStore
             {
 
             }
+        }
+
+
+        // UPDATE REDIRECTS TO NEW WINDOW
+        private void bCustomerUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateWindow updateWindow = new UpdateWindow((int)listCustomers.SelectedValue);
+
+
+            try
+            {
+                
+                string quer = "SELECT name FROM Customers where Id=@SelectedCustomer";
+
+                SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
+
+
+                SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCom);
+
+                using (sqlAdapter)
+                {
+                    sqlCom.Parameters.AddWithValue("@SelectedCustomer", listCustomers.SelectedValue);
+
+                    DataTable cusTable = new DataTable();
+
+                    sqlAdapter.Fill(cusTable);
+
+                    updateWindow.txtUpdateName.Text = cusTable.Rows[0]["name"].ToString();
+                }
+            }
+            catch
+            {
+
+            }
+         
+           updateWindow.ShowDialog();
+
+
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            ShowCustomers();
         }
     }
 }
