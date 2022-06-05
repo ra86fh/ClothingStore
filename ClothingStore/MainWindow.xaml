@@ -9,15 +9,14 @@
 
     <Grid>
         <Label Content="Customer" FontSize="18" FontFamily="Javanese Text" RenderTransformOrigin="0.52,0.047" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" UseLayoutRounding="True" Margin="48,-3,552,0" Height="33" VerticalAlignment="Top"/>
-        <ListBox x:Name="listCustomers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="48,71,552,98" FontFamily="Javanese Text" SelectionChanged="listCustomers_SelectionChanged"/>
+        <ListBox x:Name="listCustomers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="48,35,552,137" FontFamily="Javanese Text" SelectionChanged="listCustomers_SelectionChanged"/>
         <ListBox x:Name="listOrders" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="298,30,302,57" FontFamily="Javanese Text"/>
         <Label Content="Customer Orders" Margin="298,-2,302,0" FontFamily="Javanese Text" FontSize="18" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Height="41" VerticalAlignment="Top"/>
         <ListBox x:Name="listAllOrders" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="552,30,48,57" SelectionChanged="listAllOrders_SelectionChanged"/>
         <Label Content="All Orders" Margin="552,-3,48,0" FontFamily="Javanese Text" FontSize="18" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Height="41" VerticalAlignment="Top"/>
         <Button x:Name="bCustomerDelete" Content="Delete" Margin="48,0,552,15" FontSize="16" FontFamily="Javanese Text" Height="36" VerticalAlignment="Bottom" Click="bCustomerDelete_Click"/>
         <Button x:Name="bOrderDelete" Content="Delete" Margin="298,0,302,15" FontSize="16" FontFamily="Javanese Text" Click="bOrderDelete_Click" Height="36" VerticalAlignment="Bottom"/>
-        <Button x:Name="bCustomerInsert" Content="+" Margin="0,31,552,0" FontSize="16" FontFamily="Javanese Text" Click="bCustomerInsert_Click" FontWeight="Bold" Height="35" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25"/>
-        <TextBox x:Name="txtCustomer" Margin="48,30,582,0" TextWrapping="Wrap" FontSize="16" Height="36" VerticalAlignment="Top" VerticalContentAlignment="Center" FontFamily="Javanese Text"/>
+        <Button x:Name="bCustomerInsert" Content="New" Margin="48,0,552,98" FontSize="16" FontFamily="Javanese Text" Click="bCustomerInsert_Click" FontWeight="Normal" Height="34" VerticalAlignment="Bottom"/>
         <Label Content="Developed by Raul Finana" Margin="552,0,48,10" FontFamily="Javanese Text" FontSize="14" Foreground="#FF7B7373" FontStyle="Italic" Height="42" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         <Button x:Name="bCustomerUpdate" Content="Update" Margin="48,0,552,57" FontSize="16" FontFamily="Javanese Text" Height="36" VerticalAlignment="Bottom" Click="bCustomerUpdate_Click"/>
 

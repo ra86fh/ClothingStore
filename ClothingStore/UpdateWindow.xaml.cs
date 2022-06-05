@@ -31,13 +31,16 @@ namespace ClothingStore
         private void bAcceptUpdate_Click(object sender, RoutedEventArgs e)
         {
 
-            string quer = "UPDATE Customers SET name=@nameCust WHERE Id=" + z;
+            string quer = "UPDATE Customers SET name=@nameCust, address=@addressCust, city=@cityCust, phone=@phoneCust WHERE Id=" + z;
 
             SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
 
             sqlconn.Open();
 
             sqlCom.Parameters.AddWithValue("@nameCust", txtUpdateName.Text);
+            sqlCom.Parameters.AddWithValue("@addressCust", txtUpdateAddress.Text);
+            sqlCom.Parameters.AddWithValue("@cityCust", txtUpdateCity.Text);
+            sqlCom.Parameters.AddWithValue("@phoneCust", txtUpdatePhone.Text);
 
             sqlCom.ExecuteNonQuery();
 

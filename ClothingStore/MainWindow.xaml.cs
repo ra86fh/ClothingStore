@@ -190,35 +190,20 @@ namespace ClothingStore
             }
         }
 
+
+
+        // UPDATE REDIRECTS TO NEW WINDOW
+
         private void bCustomerInsert_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show("Customer created");
+            Create create = new Create();
 
-            string quer = "INSERT INTO Customers (name) VALUES (@Name)";
+            create.ShowDialog();
+            ShowCustomers();
 
-            SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
 
-            sqlconn.Open();
-
-            sqlCom.Parameters.AddWithValue("@Name", txtCustomer.Text);
-
-            sqlCom.ExecuteNonQuery();
-
-            sqlconn.Close();
-
-            txtCustomer.Clear();
-
-            try
-            {
-                ShowCustomers();
-            }
-            catch
-            {
-
-            }
         }
-
 
         // UPDATE REDIRECTS TO NEW WINDOW
         private void bCustomerUpdate_Click(object sender, RoutedEventArgs e)
@@ -229,7 +214,7 @@ namespace ClothingStore
             try
             {
 
-                string quer = "SELECT name FROM Customers where Id=@SelectedCustomer";
+                string quer = "SELECT name,address,city,phone FROM Customers where Id=@SelectedCustomer";
 
                 SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
 
@@ -245,6 +230,9 @@ namespace ClothingStore
                     sqlAdapter.Fill(cusTable);
 
                     updateWindow.txtUpdateName.Text = cusTable.Rows[0]["name"].ToString();
+                    updateWindow.txtUpdateAddress.Text = cusTable.Rows[0]["address"].ToString();
+                    updateWindow.txtUpdateCity.Text = cusTable.Rows[0]["city"].ToString();
+                    updateWindow.txtUpdatePhone.Text = cusTable.Rows[0]["phone"].ToString();
                 }
             }
             catch
