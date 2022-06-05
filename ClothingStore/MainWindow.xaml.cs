@@ -210,6 +210,7 @@ namespace ClothingStore
             txtCustomer.Clear();
 
             try
+
             {
                 ShowCustomers();
             }
