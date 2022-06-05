@@ -253,13 +253,10 @@ namespace ClothingStore
             }
 
             updateWindow.ShowDialog();
-
-
-        }
-
-        private void Window_Activated(object sender, EventArgs e)
-        {
             ShowCustomers();
+
+
         }
+
     }
 }

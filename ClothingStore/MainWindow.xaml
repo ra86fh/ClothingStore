@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClothingStore"
         mc:Ignorable="d"
-        Title="Order Management Application" Height="450" Width="800"
-        Activated="Window_Activated">
+        Title="Order Management Application" Height="450" Width="800">
+
     <Grid>
         <Label Content="Customer" FontSize="18" FontFamily="Javanese Text" RenderTransformOrigin="0.52,0.047" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" UseLayoutRounding="True" Margin="48,-3,552,0" Height="33" VerticalAlignment="Top"/>
         <ListBox x:Name="listCustomers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="48,71,552,98" FontFamily="Javanese Text" SelectionChanged="listCustomers_SelectionChanged"/>
