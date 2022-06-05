@@ -52,11 +52,20 @@ namespace ClothingStore
                     listCustomers.SelectedValuePath = "Id";
                     listCustomers.ItemsSource = customersTable.DefaultView;
                 }
+
             }
             catch
             {
 
             }
+
+
+            }
+            catch
+            {
+          
+            }
+            
 
         }
 
@@ -70,6 +79,7 @@ namespace ClothingStore
                 SqlCommand sqlCom = new SqlCommand(quer, sqlconn);
 
                 SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCom);
+
 
                 using (sqlAdapter)
                 {
@@ -89,7 +99,29 @@ namespace ClothingStore
             {
 
 
+
+
+                using (sqlAdapter)
+                {
+                    sqlCom.Parameters.AddWithValue("@CustomerId", listCustomers.SelectedValue);
+
+
+                    DataTable ordersTable = new DataTable();
+
+                    sqlAdapter.Fill(ordersTable);
+
+                    listOrders.DisplayMemberPath = "orderDate";
+                    listOrders.SelectedValuePath = "Id";
+                    listOrders.ItemsSource = ordersTable.DefaultView;
+                }
             }
+            catch
+            {
+
+                
+
+            }
+            
 
 
         }
